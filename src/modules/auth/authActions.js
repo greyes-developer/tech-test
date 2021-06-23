@@ -1,4 +1,4 @@
-import {getToken, setToken} from '../../shared/config/localStorage';
+import {setToken} from '../../shared/config/localStorage';
 import {login} from '../services/auth';
 import {AUTH_TYPES} from './authActionTypes';
 
@@ -31,7 +31,6 @@ export const startLogin = payload => {
 
       if (res.data.success) {
         await setToken(res.data.payload.access);
-        // const token = await getToken();
         dispatch(doAuthLoginSuccess(res.data));
       }
     } catch (e) {
