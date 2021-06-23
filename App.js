@@ -1,12 +1,9 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+
+import AppRouting from './src/routes/AppRouting';
 
 const App = () => {
-  return (
-    <SafeAreaView>
-      <Text>Hola mundo</Text>
-    </SafeAreaView>
-  );
+  return <AppRouting />;
 };
 
 export default App;
