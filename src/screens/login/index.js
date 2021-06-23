@@ -1,16 +1,35 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet, TextInput, ActivityIndicator} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import ButtonCustom from '../../components/atoms/ButtonCustom';
+import {startLogin} from '../../modules/auth/authActions';
+import {COLORS} from '../../shared/styles';
 
 const LoginScreen = ({navigation}) => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+
+  const {loading, error, data} = useSelector(state => state.auth);
+
   const login = () => {
-    console.log(user);
-    navigation.navigate('HomeScreen');
+    const payload = {
+      email: user || 'e2e.test.signup@tauros.io',
+      password: password || 'Reactnative@12',
+      device_name: 'iphone 11',
+      unique_device_id: 'textoAleatorio',
+    };
+
+    dispatch(startLogin(payload));
   };
+
+  useEffect(() => {
+    if (!loading && !error && data) {
+      navigation.navigate('HomeScreen');
+    }
+  }, [loading]);
 
   return (
     <View style={styles.container}>
@@ -27,7 +46,9 @@ const LoginScreen = ({navigation}) => {
         placeholder="Contraseña"
         secureTextEntry={true}
       />
-      <ButtonCustom text="Iniciar sesión" onPress={login} />
+      {loading && <ActivityIndicator size="large" color={COLORS.CORE_BLUE} />}
+      {!loading && error && <Text>Hubo un error</Text>}
+      {!loading && <ButtonCustom text="Iniciar sesión" onPress={login} />}
     </View>
   );
 };
