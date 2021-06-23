@@ -1,5 +1,6 @@
 import axios from 'axios';
+import {ENVIRONMENT} from '../../environment';
 
 export const cryptAPI = axios.create({
-  baseURL: 'https://api.staging.tauros.io',
+  baseURL: ENVIRONMENT.BASE_URL,
 });

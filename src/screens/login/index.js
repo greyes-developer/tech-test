@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import ButtonCustom from '../../components/atoms/ButtonCustom';
 import {startLogin} from '../../modules/auth/authActions';
 import {COLORS} from '../../shared/styles';
+import {ENVIRONMENT} from '../../environment';
 
 const LoginScreen = ({navigation}) => {
   const [user, setUser] = useState('');
@@ -16,8 +17,8 @@ const LoginScreen = ({navigation}) => {
 
   const login = () => {
     const payload = {
-      email: user || 'e2e.test.signup@tauros.io',
-      password: password || 'Reactnative@12',
+      email: user || ENVIRONMENT.EMAIL,
+      password: password || ENVIRONMENT.PASSWORD,
       device_name: 'iphone 11',
       unique_device_id: 'textoAleatorio',
     };

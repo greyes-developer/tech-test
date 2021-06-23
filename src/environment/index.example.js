@@ -1,3 +1,5 @@
-export default {
-  BASE_URL: __DEV__ ? 'enpoint' : 'enpoint',
+export default ENVIRONMENT = {
+  BASE_URL: __DEV__ ? 'string' : 'string',
+  EMAIL: 'string',
+  PASSWORD: 'string',
 };
