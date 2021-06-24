@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   address: null,
   loadingAddress: false,
+  loadingSendCrypto: false,
 };
 
 export default (state = initialState, {type, payload}) => {
@@ -45,6 +46,21 @@ export default (state = initialState, {type, payload}) => {
         ...state,
         loadingAddress: false,
         error: payload,
+      };
+    case WALLET_TYPES.WALLET_SEND_CRYPTO_START:
+      return {
+        ...state,
+        loadingSendCrypto: true,
+      };
+    case WALLET_TYPES.WALLET_SEND_CRYPTO_SUCCESS:
+      return {
+        ...state,
+        loadingSendCrypto: false,
+      };
+    case WALLET_TYPES.WALLET_SEND_CRYPTO_ERROR:
+      return {
+        ...state,
+        loadingSendCrypto: false,
       };
     default:
       return state;

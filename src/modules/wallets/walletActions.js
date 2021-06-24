@@ -1,4 +1,8 @@
-import {walletDepositAddress, walletList} from '../services/wallet';
+import {
+  walletList,
+  walletDepositAddress,
+  walletSendCrypto,
+} from '../services/wallet';
 import {WALLET_TYPES} from './walletActionTypes';
 
 export const doWalletListStart = () => {
@@ -69,6 +73,42 @@ export const startWalletDepositAddress = payload => {
       }
     } catch (e) {
       dispatch(doWalletDepositAddressError(e));
+    }
+  };
+};
+
+export const doWalletSendCryptoStart = () => {
+  return {
+    type: WALLET_TYPES.WALLET_SEND_CRYPTO_START,
+  };
+};
+
+export const doWalletSendCryptoSuccess = payload => {
+  return {
+    type: WALLET_TYPES.WALLET_SEND_CRYPTO_SUCCESS,
+    payload,
+  };
+};
+
+export const doWalletSendCryptoError = payload => {
+  return {
+    type: WALLET_TYPES.WALLET_SEND_CRYPTO_ERROR,
+    payload,
+  };
+};
+
+export const startWalletSendCrypto = payload => {
+  return async dispatch => {
+    dispatch(doWalletSendCryptoStart());
+
+    try {
+      const res = await walletSendCrypto(payload);
+
+      if (res.data.success) {
+        dispatch(doWalletSendCryptoSuccess(res.data));
+      }
+    } catch (e) {
+      dispatch(doWalletSendCryptoError(e));
     }
   };
 };

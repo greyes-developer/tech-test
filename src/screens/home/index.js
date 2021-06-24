@@ -29,9 +29,6 @@ const HomeScreen = () => {
     dispatch(startCoinList());
   }, []);
 
-  // console.log('Todo el estado');
-  // console.log(`${JSON.stringify(wow)}`);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home screen</Text>

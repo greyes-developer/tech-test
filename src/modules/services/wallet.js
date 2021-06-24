@@ -20,3 +20,31 @@ export const walletDepositAddress = async coin => {
     },
   });
 };
+
+export const walletSendCrypto = async ({
+  coin,
+  amount,
+  nip,
+  recipient,
+  description,
+}) => {
+  const token = await getToken();
+
+  return cryptAPI.post(
+    '/api/v3/wallets/inner-transfer/',
+    {
+      coin,
+      amount,
+      nip,
+      recipient,
+      description,
+    },
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `JWT-V3 ${token}`,
+      },
+    },
+  );
+};
