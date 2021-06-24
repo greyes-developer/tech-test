@@ -31,16 +31,18 @@ const styles = StyleSheet.create({
     borderStartColor: COLORS.BLACK_100,
     borderWidth: 1,
     marginBottom: 4,
-    padding: 6
+    padding: 6,
   },
   titleContainer: {
     display: 'flex',
     flexDirection: 'row',
+    marginTop: 4,
+    marginBottom: 4,
   },
   image: {
     width: 24,
     height: 24,
-    marginRight: 8
+    marginRight: 8,
   },
   title: {
     fontSize: 16,

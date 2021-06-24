@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import ButtonCustom from '../../components/atoms/ButtonCustom';
 import {startLogin} from '../../modules/auth/authActions';
+import ErrorMessage from '../../components/atoms/ErrorMessage';
 import {COLORS} from '../../shared/styles';
 import {ENVIRONMENT} from '../../environment';
 
@@ -48,7 +49,7 @@ const LoginScreen = ({navigation}) => {
         secureTextEntry={true}
       />
       {loading && <ActivityIndicator size="large" color={COLORS.CORE_BLUE} />}
-      {!loading && error && <Text>Hubo un error</Text>}
+      {!loading && error && <ErrorMessage />}
       {!loading && <ButtonCustom text="Iniciar sesión" onPress={login} />}
     </View>
   );
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     paddingHorizontal: 12,
+    backgroundColor: COLORS.WHITE,
   },
   input: {
     height: 40,
