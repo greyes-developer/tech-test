@@ -5,12 +5,22 @@ import OverlayLoading from '../atoms/OverlayLoading';
 import WalletCard from '../molecules/WalletCard';
 
 const ListWalletCard = () => {
-  const {data} = useSelector(state => state.wallet);
+  const {data: dataWallet} = useSelector(state => state.wallet);
+  const {data: dataCoin} = useSelector(state => state.coin);
+
+  const dataWalletCalculated = dataWallet.data.wallets.map(item => {
+    dataCoin.map(coin => {
+      if (coin.market.includes(`${item.coin}`))
+        item.valuePesosMxn = parseFloat(item.balances.available) * coin.last;
+    });
+
+    return item;
+  });
 
   return (
     <View style={{height: '85%'}}>
       <FlatList
-        data={data.data.wallets}
+        data={dataWalletCalculated}
         renderItem={({item}) => (
           <WalletCard
             coinIcon={item.coin_icon}
@@ -18,6 +28,7 @@ const ListWalletCard = () => {
             coinName={item.coin_name}
             available={item.available_to_deposit}
             balance={item.balances.available}
+            valuePesosMxn={item.valuePesosMxn}
           />
         )}
         keyExtractor={(item, index) => index}

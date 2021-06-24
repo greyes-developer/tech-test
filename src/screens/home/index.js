@@ -1,25 +1,49 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import ListWalletCard from '../../components/organisms/ListWalletCard';
 
+import {startWalletDepositAddress} from '../../modules/wallets/walletActions';
 import {startWalletList} from '../../modules/wallets/walletActions';
+import {startCoinList} from '../../modules/coins/coinActions';
+import ListWalletCard from '../../components/organisms/ListWalletCard';
 import {COLORS} from '../../shared/styles';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
-  const {loading, data, error} = useSelector(state => state.wallet);
+  const {
+    loading: loadingWallet,
+    data: dataWallet,
+    loadingAddress,
+    address,
+  } = useSelector(state => state.wallet);
+  const {loading: loadingCoin, data: dataCoin} = useSelector(
+    state => state.coin,
+  );
+
+  const wow = useSelector(state => state);
 
   useEffect(() => {
     dispatch(startWalletList());
+    dispatch(startWalletDepositAddress('BTC'));
+    dispatch(startCoinList());
   }, []);
+
+  // console.log('Todo el estado');
+  // console.log(`${JSON.stringify(wow)}`);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home screen</Text>
-      {loading && <ActivityIndicator size="large" color={COLORS.CORE_BLUE} />}
-      {!loading && data && <ListWalletCard />}
+      {loadingWallet && loadingAddress && loadingCoin && (
+        <ActivityIndicator size="large" color={COLORS.CORE_BLUE} />
+      )}
+      {!loadingWallet &&
+        !loadingCoin &&
+        !loadingAddress &&
+        address &&
+        dataWallet &&
+        dataCoin && <ListWalletCard />}
     </View>
   );
 };
@@ -30,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 8,
     paddingRight: 8,
-    backgroundColor: COLORS.WHITE
+    backgroundColor: COLORS.WHITE,
   },
   title: {
     fontSize: 24,

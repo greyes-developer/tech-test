@@ -8,18 +8,22 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {startWalletDepositAddress} from '../../modules/wallets/walletActions';
 
 import {COLORS} from '../../shared/styles';
 import Separator from '../atoms/Separator';
 
-const WalletCard = ({coinIcon, coinTitle, coinName, available, balance}) => {
-  const dispatch = useDispatch();
-
-  const {loadingAddress, address} = useSelector(state => state.wallet);
+const WalletCard = ({
+  coinIcon,
+  coinTitle,
+  coinName,
+  available,
+  balance,
+  valuePesosMxn,
+}) => {
+  // const dispatch = useDispatch();
 
   const onPress = () => {
-    dispatch(startWalletDepositAddress(coinTitle));
+    console.log('Qué hago?');
   };
 
   return (
@@ -38,7 +42,9 @@ const WalletCard = ({coinIcon, coinTitle, coinName, available, balance}) => {
             </View>
             <Separator />
             <Text style={styles.name}>Saldo actual de crypto: {balance}</Text>
-            <Text style={styles.name}>Equivalente a pesos MXN: {balance}</Text>
+            <Text style={styles.name}>
+              Equivalente a pesos MXN: {valuePesosMxn}
+            </Text>
           </View>
         </TouchableHighlight>
       )}
@@ -48,7 +54,6 @@ const WalletCard = ({coinIcon, coinTitle, coinName, available, balance}) => {
 
 const styles = StyleSheet.create({
   container: {
-    // height: 100,
     width: '100%',
     backgroundColor: COLORS.WHITE,
     borderRadius: 8,

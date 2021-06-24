@@ -5,7 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   address: null,
-  loadingAdress: false,
+  loadingAddress: false,
 };
 
 export default (state = initialState, {type, payload}) => {
@@ -31,19 +31,19 @@ export default (state = initialState, {type, payload}) => {
     case WALLET_TYPES.WALLET_DEPOSIT_ADDRESS_START:
       return {
         ...state,
-        loadingAdress: true,
+        loadingAddress: true,
       };
     case WALLET_TYPES.WALLET_DEPOSIT_ADDRESS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loadingAddress: false,
         error: null,
         address: payload,
       };
     case WALLET_TYPES.WALLET_DEPOSIT_ADDRESS_ERROR:
       return {
         ...state,
-        loading: false,
+        loadingAddress: false,
         error: payload,
       };
     default:

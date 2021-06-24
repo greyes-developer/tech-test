@@ -1,4 +1,4 @@
-import {walletDepositAddres, walletList} from '../services/wallet';
+import {walletDepositAddress, walletList} from '../services/wallet';
 import {WALLET_TYPES} from './walletActionTypes';
 
 export const doWalletListStart = () => {
@@ -62,12 +62,10 @@ export const startWalletDepositAddress = payload => {
     dispatch(doWalletDepositAddressStart());
 
     try {
-      const res = await walletDepositAddres(payload);
+      const res = await walletDepositAddress(payload);
 
       if (res.data.success) {
-        dispatch(
-          doWalletDepositAddressSuccess(res.data.success.payload.address),
-        );
+        dispatch(doWalletDepositAddressSuccess(res.data.payload.address));
       }
     } catch (e) {
       dispatch(doWalletDepositAddressError(e));

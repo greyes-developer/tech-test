@@ -11,7 +11,7 @@ export const walletList = async () => {
   });
 };
 
-export const walletDepositAddres = async coin => {
+export const walletDepositAddress = async coin => {
   const token = await getToken();
   return cryptAPI.get(`/api/v2/wallets/address/${coin}/`, {
     headers: {
