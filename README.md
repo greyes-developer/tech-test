@@ -13,3 +13,5 @@
 5. Run `npx react-native start` to start metro bundler
 
 6. Run (in other bash) `npx react-native run-android` to run the mobile application
+
+7. Readme modificated
